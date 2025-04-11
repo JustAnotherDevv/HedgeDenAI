@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    --background: 0 0% 95%;
+    --background: 0 0% 96%;
     --foreground: 222 47% 11%;
-    --card: 0 0% 95%;
+    --card: 0 0% 96%;
     --card-foreground: 222 47% 11%;
-    --popover: 0 0% 95%;
+    --popover: 0 0% 96%;
     --popover-foreground: 222 47% 11%;
     --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
@@ -24,6 +24,15 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 1.5rem;
+
+    /* Additional neumorphic variables */
+    --surface: #f5f5f7;
+    --shadow-light: rgba(255, 255, 255, 0.9);
+    --shadow-dark: rgba(195, 195, 195, 0.5);
+    --shadow-medium: rgba(174, 174, 192, 0.2);
+    --shadow-inset-light: rgba(255, 255, 255, 0.7);
+    --shadow-inset-dark: rgba(195, 195, 195, 0.4);
+    --highlight: rgba(255, 255, 255, 0.8);
   }
 }
 
@@ -32,50 +41,225 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#f2f2f2] text-foreground;
+    @apply bg-[var(--surface)] text-foreground antialiased;
+    background: linear-gradient(145deg, #f5f5f7, #f0f0f2);
   }
 }
 
 @layer components {
+  /* Main card with improved shadows and subtle gradient */
   .neumorphic-card {
-    @apply bg-[#f2f2f2] rounded-[var(--radius)] p-6;
-    box-shadow: 20px 20px 60px #cecece, -20px -20px 60px #ffffff;
+    @apply relative rounded-[var(--radius)] p-6 overflow-hidden;
+    background: linear-gradient(145deg, #f8f8fa, #f2f2f4);
+    box-shadow: 12px 12px 24px var(--shadow-dark),
+      -6px -6px 20px var(--shadow-light), inset 1px 1px 1px var(--shadow-light);
+    transition: all 0.3s ease;
   }
 
+  .neumorphic-card:hover {
+    box-shadow: 14px 14px 28px var(--shadow-dark),
+      -7px -7px 22px var(--shadow-light), inset 1px 1px 1px var(--shadow-light);
+  }
+
+  /* Secondary card with different shadow style */
+  .neumorphic-card-concave {
+    @apply relative rounded-[var(--radius)] p-6 overflow-hidden;
+    background: linear-gradient(145deg, #f2f2f4, #f8f8fa);
+    box-shadow: inset 5px 5px 10px var(--shadow-dark),
+      inset -5px -5px 10px var(--shadow-light);
+    transition: all 0.3s ease;
+  }
+
+  /* Elegant buttons with smooth transitions */
   .neumorphic-button {
-    @apply bg-[#f2f2f2] rounded-xl px-4 py-2 transition-all duration-200 border-0;
-    box-shadow: 5px 5px 15px #cecece, -5px -5px 15px #ffffff;
+    @apply relative bg-[var(--surface)] rounded-xl px-5 py-2.5 transition-all duration-300 border-0 font-medium;
+    background: linear-gradient(145deg, #f8f8fa, #f2f2f4);
+    box-shadow: 6px 6px 12px var(--shadow-dark),
+      -3px -3px 8px var(--shadow-light), inset 1px 1px 1px var(--shadow-light);
+  }
+
+  .neumorphic-button:before {
+    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300;
+    content: "";
+    background: linear-gradient(145deg, #f2f2f4, #f8f8fa);
+    box-shadow: inset 2px 2px 5px var(--shadow-dark),
+      inset -2px -2px 5px var(--shadow-light);
   }
 
   .neumorphic-button:hover {
-    box-shadow: 7px 7px 20px #cecece, -7px -7px 20px #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 8px 8px 16px var(--shadow-dark),
+      -4px -4px 10px var(--shadow-light), inset 1px 1px 1px var(--shadow-light);
+  }
+
+  .neumorphic-button:active:before {
+    @apply opacity-100;
   }
 
   .neumorphic-button:active {
-    @apply bg-[#e8e8e8];
-    box-shadow: inset 5px 5px 10px #cecece, inset -5px -5px 10px #ffffff;
+    transform: translateY(1px);
+    box-shadow: 3px 3px 6px var(--shadow-dark),
+      -2px -2px 5px var(--shadow-light);
   }
 
+  /* Primary button with accent color */
+  .neumorphic-button-primary {
+    @apply neumorphic-button text-primary-foreground;
+    background: linear-gradient(
+      145deg,
+      hsl(var(--primary)),
+      hsl(calc(var(--primary) - 10deg), 80%, 50%)
+    );
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1),
+      -3px -3px 8px rgba(255, 255, 255, 0.1),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+  }
+
+  .neumorphic-button-primary:before {
+    background: linear-gradient(
+      145deg,
+      hsl(calc(var(--primary) - 10deg), 80%, 50%),
+      hsl(var(--primary))
+    );
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1),
+      inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+  }
+
+  .neumorphic-button-primary:hover {
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.15),
+      -4px -4px 10px rgba(255, 255, 255, 0.1),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Improved input fields */
   .neumorphic-input {
-    @apply bg-[#f2f2f2] rounded-xl px-4 py-2 w-full border-0;
-    box-shadow: inset 5px 5px 10px #cecece, inset -5px -5px 10px #ffffff;
+    @apply bg-[var(--surface)] rounded-xl px-4 py-3 w-full border-0 transition-all duration-300;
+    box-shadow: inset 4px 4px 8px var(--shadow-inset-dark),
+      inset -4px -4px 8px var(--shadow-inset-light);
   }
 
+  .neumorphic-input:focus {
+    outline: none;
+    box-shadow: inset 5px 5px 10px var(--shadow-inset-dark),
+      inset -5px -5px 10px var(--shadow-inset-light),
+      0 0 0 3px var(--shadow-medium);
+  }
+
+  /* Enhanced tabs container */
   .neumorphic-tabs {
-    @apply bg-[#f2f2f2] rounded-xl p-1;
-    box-shadow: inset 3px 3px 7px #cecece, inset -3px -3px 7px #ffffff;
+    @apply bg-[var(--surface)] rounded-xl p-1.5;
+    box-shadow: inset 3px 3px 7px var(--shadow-inset-dark),
+      inset -3px -3px 7px var(--shadow-inset-light);
   }
 
+  /* Tab triggers with better transitions */
   .neumorphic-tab {
-    @apply rounded-lg px-4 py-2 transition-all duration-200;
+    @apply relative rounded-lg px-5 py-2.5 transition-all duration-300 overflow-hidden z-10;
+  }
+
+  .neumorphic-tab:before {
+    @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 z-[-1];
+    content: "";
   }
 
   .neumorphic-tab[data-state="active"] {
-    box-shadow: 5px 5px 10px #cecece, -5px -5px 10px #ffffff;
+    background: linear-gradient(145deg, #f8f8fa, #f2f2f4);
+    box-shadow: 4px 4px 8px var(--shadow-dark),
+      -2px -2px 6px var(--shadow-light), inset 1px 1px 1px var(--shadow-light);
   }
 
+  .neumorphic-tab[data-state="active"]:before {
+    @apply opacity-100;
+  }
+
+  .neumorphic-tab:hover:not([data-state="active"]) {
+    background: var(--highlight);
+  }
+
+  /* Chart container with inset shadow */
   .neumorphic-chart {
-    @apply bg-[#f2f2f2] rounded-xl p-6;
-    box-shadow: inset 5px 5px 10px #cecece, inset -5px -5px 10px #ffffff;
+    @apply bg-[var(--surface)] rounded-xl p-6;
+    background: linear-gradient(145deg, #f2f2f4, #f6f6f8);
+    box-shadow: inset 4px 4px 10px var(--shadow-inset-dark),
+      inset -4px -4px 10px var(--shadow-inset-light);
+  }
+
+  /* Subtle divider */
+  .neumorphic-divider {
+    @apply h-px w-full my-6;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--shadow-dark) 15%,
+      var(--shadow-dark) 85%,
+      transparent 100%
+    );
+  }
+
+  /* Subtle text effect for headings */
+  .neumorphic-text {
+    @apply font-semibold;
+    text-shadow: 1px 1px 1px var(--shadow-light),
+      -1px -1px 1px var(--shadow-dark);
+  }
+
+  /* Badge for status indicators */
+  .neumorphic-badge {
+    @apply inline-flex items-center justify-center px-3 py-1 text-xs font-medium rounded-full;
+    background: linear-gradient(145deg, #f8f8fa, #f2f2f4);
+    box-shadow: 2px 2px 4px var(--shadow-dark),
+      -1px -1px 3px var(--shadow-light);
+  }
+
+  /* Switch component for toggles */
+  .neumorphic-switch {
+    @apply relative w-12 h-6 rounded-full transition-all duration-300;
+    background: linear-gradient(145deg, #f2f2f4, #f8f8fa);
+    box-shadow: inset 2px 2px 4px var(--shadow-inset-dark),
+      inset -2px -2px 4px var(--shadow-inset-light);
+  }
+
+  .neumorphic-switch:after {
+    @apply absolute top-1 left-1 w-4 h-4 rounded-full transition-all duration-300;
+    content: "";
+    background: linear-gradient(145deg, #f8f8fa, #f2f2f4);
+    box-shadow: 2px 2px 4px var(--shadow-dark),
+      -1px -1px 3px var(--shadow-light);
+  }
+
+  .neumorphic-switch[data-state="checked"]:after {
+    @apply left-7;
+    background: linear-gradient(
+      145deg,
+      hsl(var(--primary)),
+      hsl(calc(var(--primary) - 10deg), 80%, 50%)
+    );
+  }
+
+  /* Hover card for tooltips */
+  .neumorphic-tooltip {
+    @apply p-3 rounded-lg;
+    background: linear-gradient(145deg, #f8f8fa, #f2f2f4);
+    box-shadow: 4px 4px 8px var(--shadow-dark),
+      -2px -2px 6px var(--shadow-light);
+  }
+
+  /* Improved scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, #f2f2f4 0%, #f8f8fa 100%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(145deg, #e0e0e5, #f0f0f5);
+    border-radius: 6px;
+    border: 3px solid #f5f5f7;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(145deg, #d8d8e0, #e8e8f0);
   }
 }
