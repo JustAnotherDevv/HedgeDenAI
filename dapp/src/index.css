@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 95%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 95%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 95%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 1.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#f2f2f2] text-foreground;
+  }
+}
+
+@layer components {
+  .neumorphic-card {
+    @apply bg-[#f2f2f2] rounded-[var(--radius)] p-6;
+    box-shadow: 20px 20px 60px #cecece, -20px -20px 60px #ffffff;
+  }
+
+  .neumorphic-button {
+    @apply bg-[#f2f2f2] rounded-xl px-4 py-2 transition-all duration-200 border-0;
+    box-shadow: 5px 5px 15px #cecece, -5px -5px 15px #ffffff;
+  }
+
+  .neumorphic-button:hover {
+    box-shadow: 7px 7px 20px #cecece, -7px -7px 20px #ffffff;
+  }
+
+  .neumorphic-button:active {
+    @apply bg-[#e8e8e8];
+    box-shadow: inset 5px 5px 10px #cecece, inset -5px -5px 10px #ffffff;
+  }
+
+  .neumorphic-input {
+    @apply bg-[#f2f2f2] rounded-xl px-4 py-2 w-full border-0;
+    box-shadow: inset 5px 5px 10px #cecece, inset -5px -5px 10px #ffffff;
+  }
+
+  .neumorphic-tabs {
+    @apply bg-[#f2f2f2] rounded-xl p-1;
+    box-shadow: inset 3px 3px 7px #cecece, inset -3px -3px 7px #ffffff;
+  }
+
+  .neumorphic-tab {
+    @apply rounded-lg px-4 py-2 transition-all duration-200;
+  }
+
+  .neumorphic-tab[data-state="active"] {
+    box-shadow: 5px 5px 10px #cecece, -5px -5px 10px #ffffff;
+  }
+
+  .neumorphic-chart {
+    @apply bg-[#f2f2f2] rounded-xl p-6;
+    box-shadow: inset 5px 5px 10px #cecece, inset -5px -5px 10px #ffffff;
+  }
+}
