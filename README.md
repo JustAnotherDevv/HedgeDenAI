@@ -2,7 +2,7 @@
 
 ## Overview
 
-VoiceWallet is completely new type of crypto wallet which uses voice commands for control.
+VoiceWallet is completely new type of crypto wallet which uses voice commands for control. Think of it as Alexa assistant but for crypto, instead of asking for weather ask for current Solana price. Instead of help with amazon purchase choice it can help ape into highest APY yield vault, swap tokens, bridge them using Wormhole.
 
 <p align="center">
 <br />
