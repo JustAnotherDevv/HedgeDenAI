@@ -91,9 +91,7 @@ export default function VoiceChat() {
     console.log("Component mounted, applying animation");
     setTimeout(() => setAnimate(true), 100);
 
-    const savedApiKey =
-      "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";
-    // localStorage.getItem("whisper_api_key");
+    const savedApiKey = localStorage.getItem("whisper_api_key");
     if (savedApiKey) {
       console.log("Found saved API key in localStorage");
       setApiKey(savedApiKey);
@@ -685,7 +683,7 @@ export default function VoiceChat() {
       <header className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <h1 className="text-3xl font-extrabold bg-gradient-to-r from-primary to-indigo-400 bg-clip-text text-primary neumorphic-text">
-            AI Voice Assistant
+            VoiceWallet
           </h1>
         </div>
         <div className="flex items-center gap-4">
@@ -837,7 +835,7 @@ export default function VoiceChat() {
       <div className="neumorphic-card h-[calc(100vh-13rem)] flex flex-col">
         <div className="flex items-center justify-between mb-6 px-2">
           <h3 className="text-xl font-semibold neumorphic-text">
-            Chat with HedgeDen AI
+            Chat with your wallet
           </h3>
           <button
             className="neumorphic-button text-muted-foreground font-medium"
