@@ -23,3 +23,19 @@ Setup env vars in `ai-agent` dir:
 - `export TAVILY_API_KEY='api_key'`
 
 ### Dapp
+
+Setup in /Dapp dir:
+
+- run `npm i` to install dependencies
+- set your OPENAI api key
+- run `npm run dev` to start dapp locally
+
+### Solana MCP server
+
+Download the installation script
+
+`curl -fsSL https://raw.githubusercontent.com/sendaifun/solana-mcp/main/scripts/install.sh -o solana-mcp-install.sh`
+
+Make it executable and run
+
+`chmod +x solana-mcp-install.sh && ./solana-mcp-install.sh --backup`

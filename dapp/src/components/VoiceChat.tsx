@@ -36,7 +36,7 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
-=const languages = [
+const languages = [
   { code: "en", name: "English" },
   { code: "es", name: "Spanish" },
   { code: "fr", name: "French" },
@@ -92,7 +92,7 @@ export default function VoiceChat() {
     setTimeout(() => setAnimate(true), 100);
 
     const savedApiKey =
-      "openai_api_key"
+      "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";
     // localStorage.getItem("whisper_api_key");
     if (savedApiKey) {
       console.log("Found saved API key in localStorage");
